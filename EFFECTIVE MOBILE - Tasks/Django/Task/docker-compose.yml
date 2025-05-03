@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  web-api:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./dog_api:/dog_api
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_NAME=dbname
+      - DB_USER=dbuser
+      - DB_PASSWORD=pass
+      - DB_HOST=database
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14.6-alpine
+    environment:
+      - POSTGRES_DB=dbname
+      - POSTGRES_USER=dbuser
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
