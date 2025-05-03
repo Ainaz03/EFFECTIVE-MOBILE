@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  web-api:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./dog_api:/dog_api
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    env_file:
+      - .env
+    depends_on:
+      - database
+
+  database:
+    image: postgres:14.6-alpine
+    env_file:
+      - .env
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
