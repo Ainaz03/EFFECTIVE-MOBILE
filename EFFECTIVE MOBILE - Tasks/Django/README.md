@@ -17,7 +17,7 @@ REST API на Django для управления информацией о со�
 
 ### Клонировать репозиторий
 ```
-git clone https://github.com/your-username/dog-api.git
+git clone https://github.com/Ainaz03/EFFECTIVE-MOBILE
 ```
 Создать .env файл в корне проекта
 ```
