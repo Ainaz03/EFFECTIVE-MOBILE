@@ -10,20 +10,15 @@ services:
       - ./dog_api:/dog_api
     command: >
       sh -c "python manage.py runserver 0.0.0.0:8000"
-    environment:
-      - DB_NAME=dbname
-      - DB_USER=dbuser
-      - DB_PASSWORD=pass
-      - DB_HOST=database
+    env_file:
+      - .env
     depends_on:
       - database
 
   database:
     image: postgres:14.6-alpine
-    environment:
-      - POSTGRES_DB=dbname
-      - POSTGRES_USER=dbuser
-      - POSTGRES_PASSWORD=pass
+    env_file:
+      - .env
     volumes:
       - pgdata:/var/lib/postgresql/data
 
